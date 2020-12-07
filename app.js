@@ -7,9 +7,15 @@
  // .end -> end the response
 
  const express = require("express");
- const app = express();
- const http = require('http').createServer(app);
- const io = require('socket.io')(http);
+ const app = express(); //creating a server
+ const http = require("http").createServer(app); //creating a port via app same used by socket.io
+ const cors = require('cors')
+ app.use(cors());
+ const io = require("socket.io")(http, {
+     cors: {
+         origin: '*',
+     }
+ });
 
  // app.use(express.json())
 
@@ -24,7 +30,7 @@
  app.get("/", function (request, response) {
      response.send("Welcome to web");
  })
- 
+
 
  // http.listen(3000, function () {
  //     console.log("App is listening at 3000 port");
